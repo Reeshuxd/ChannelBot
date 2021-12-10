@@ -1,0 +1,23 @@
+{
+  "name": "Channel Bot",
+  "description": "Telegram bot to ban channel spammers made with Golang",
+  "keywords": [
+        "telegram",
+        "telegram-bot",
+        "golang"
+    ],
+  "repository": "https://github.com/Reeshuxd/ChannelBot",
+  "website": "https://t.me/ItsReeshu",
+  "success_url": "https://t.me/AboutReeshu",
+  "env": {
+    "TOKEN": {
+      "description": "Bot Token, Get It From @BotFather.",
+      "value": ""
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/go"
+    }
+  ]
+}
