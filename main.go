@@ -6,20 +6,17 @@
 //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //   GNU Affero General Public License for more details.
 
-
 package main
-
 
 import (
 	"fmt"
 	"net/http"
+
 	"github.com/PaulSonOfLars/gotgbot/v2"
-	"github.com/Reeshuxd/ChannelBot/plugs"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
-	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/message"
+	"github.com/Reeshuxd/ChannelBot/plugs"
 )
-
 
 func main() {
 	b, err := gotgbot.NewBot(TOKEN, &gotgbot.BotOpts{
@@ -28,7 +25,7 @@ func main() {
 		PostTimeout: gotgbot.DefaultPostTimeout,
 	})
 	if err != nil {
-		fmt.Sprintf("Error: %v", err.Error())
+		fmt.Println(fmt.Sprintf("Error: %v", err.Error()))
 	}
 	updater := ext.NewUpdater(&ext.UpdaterOpts{
 		ErrorLog: nil,
@@ -46,11 +43,18 @@ func main() {
 
 	dispatcher.AddHandler(handlers.NewCommand("start", plugs.Start))
 	dispatcher.AddHandler(handlers.NewCommand("unban", plugs.UnBan))
-        dispatcher.AddHandler(handlers.NewMessage(message.All, plugs.Detector))
+	dispatcher.AddHandler(
+		handlers.NewMessage(
+			func(msg *gotgbot.Message) bool {
+				return msg.GetSender().IsAnonymousChannel()
+			},
+			plugs.Detector,
+		),
+	)
 	erro := updater.StartPolling(b, &ext.PollingOpts{DropPendingUpdates: true})
 	if erro != nil {
-        fmt.Println("Failed:" + err.Error())
-    }
-    fmt.Printf("Succesfully Started Bot!")
-    updater.Idle()
+		fmt.Println("Failed:" + err.Error())
+	}
+	fmt.Printf("Succesfully Started Bot!")
+	updater.Idle()
 }
