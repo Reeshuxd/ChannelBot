@@ -1,8 +1,8 @@
 package plugs
 
 import (
-    "github.com/PaulSonOfLars/gotgbot/v2"
-    "github.com/PaulSonOfLars/gotgbot/v2/ext"
+	"github.com/PaulSonOfLars/gotgbot/v2"
+	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 )
 
 func Start(bot *gotgbot.Bot, ctx *ext.Context) error {
@@ -18,7 +18,7 @@ spams your chat!
 		ctx.EffectiveMessage.Reply(
 			bot,
 			"Bot is Alive (:",
-		        &gotgbot.SendMessageOpts{ParseMode: "markdown"},
+			&gotgbot.SendMessageOpts{ParseMode: "markdown"},
 		)
 	} else {
 		ctx.EffectiveMessage.Reply(
@@ -34,5 +34,5 @@ spams your chat!
 			},
 		)
 	}
-	return nil
+	return ext.EndGroups
 }
