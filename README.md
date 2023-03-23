@@ -20,4 +20,4 @@ You can even Unban a channel with ```/unban``` command, if you choose so.
 
 ## Telegram Support
 You can report bugs and suggest updates at our
-[telegram support chat](t.me/ThetelegramChats).
+[telegram support chat](t.me/Userchatroom).
